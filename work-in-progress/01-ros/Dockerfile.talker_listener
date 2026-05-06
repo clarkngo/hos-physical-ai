@@ -1,0 +1,11 @@
+# Use the stable LTS version
+FROM ros:jazzy-ros-base AS aptgetter
+
+# Install your demo nodes
+RUN apt-get update && apt-get dist-upgrade -y && \
+    apt-get install -y \
+    ros-jazzy-demo-nodes-cpp \
+    && rm -rf /var/lib/apt/lists/*
+
+# Launch the demo
+CMD ["ros2", "launch", "demo_nodes_cpp", "talker_listener_launch.py"]

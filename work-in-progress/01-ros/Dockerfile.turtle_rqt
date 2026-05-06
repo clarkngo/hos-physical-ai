@@ -1,0 +1,15 @@
+# Use the stable LTS version
+FROM ros:jazzy-ros-base AS aptgetter
+
+# Install turtlesim and GUI tools (rqt)
+RUN apt-get update && apt-get install -y \
+    ros-jazzy-turtlesim \
+    ros-jazzy-rqt \
+    ros-jazzy-rqt-common-plugins \
+    && rm -rf /var/lib/apt/lists/*
+
+# Quality of Life: Auto-source ROS 2 every time you open a shell
+RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+
+# Start with a bash shell
+CMD ["bash"]
